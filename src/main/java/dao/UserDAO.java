@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dto.Account;
 import dto.User;
 
 public class UserDAO {
@@ -34,7 +35,7 @@ public class UserDAO {
 					SQL_SELECT_BY_USERNAME_AND_PASSWORD, false, values);
 			rs = pstmt.executeQuery();
 			if (rs.next()){
-				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("isLoggedIn"), 
+				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getInt("is_logged_in"), 
 						rs.getInt("country_id"), rs.getInt("location_id"));
 			}
 			pstmt.close();
@@ -57,7 +58,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				users.add(new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("isLoggedIn"), rs.getInt("country_id"), rs.getInt("location_id")));
+						rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getInt("is_logged_in"), rs.getInt("country_id"), rs.getInt("location_id")));
 			}
 			pstmt.close();
 		} catch (SQLException exp) {
@@ -79,7 +80,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
-						rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getInt("isLoggedIn"), rs.getInt("country_id"), rs.getInt("location_id"));
+						rs.getString("first_name"), rs.getString("last_name"), rs.getString("email"), rs.getInt("is_logged_in"), rs.getInt("country_id"), rs.getInt("location_id"));
 			}
 			pstmt.close();
 		} catch (SQLException exp) {

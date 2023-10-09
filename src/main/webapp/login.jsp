@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<jsp:useBean id="userBean" class="beans.UserBean" scope="session"></jsp:useBean>
+<jsp:useBean id="accountBean" class="beans.AccountBean" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <%
 	if (request.getParameter("submit") != null) {
-		boolean checkLogin = userBean.checkLogin(request.getParameter("username"), request.getParameter("password"));
+		boolean checkLogin = accountBean.checkLogin(request.getParameter("username"), request.getParameter("password"));
 		if (checkLogin) {
 			session.setAttribute("notification", "");
 			response.sendRedirect("messages.jsp");

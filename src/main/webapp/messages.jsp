@@ -39,7 +39,7 @@ if (request.getParameter("submit") != null) {
       	out.print("<td>" + message.getLastName() + "</td>");
       	out.print("<td>" + message.getEmail() + "</td>");
       	out.print("<td>" + message.getText() + "</td>");
-      	out.print("<td>" + message.getIsRiddenString() + "</td>");
+      	out.print("<td>" + message.getIsReadString() + "</td>");
       	out.print("<td><a href='replay-message.jsp?messageId=" + message.getId() + "'> Replay</a></td>");
       	out.println("</tr>");
       }

@@ -14,10 +14,10 @@ public class MessageDAO implements Serializable {
 
 	private static final long serialVersionUID = -3703701232632931628L;
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-	private static final String SQL_SELECT_ALL_MESSAGES = "SELECT m.id, u.id AS userId, username, firstName, lastName, email, m.text, m.isRidden FROM user u INNER JOIN message m ON u.id = m.user_id;";
-	private static final String SQL_SELECT_MESSAGE_WITH_ID = "SELECT m.id, u.id AS userId, username, firstName, lastName, email, m.text, m.isRidden FROM user u INNER JOIN message m ON u.id = m.user_id WHERE m.id=?";
-	private static final String SQL_UPDATE_MESSAGE_AS_READ = "UPDATE message m SET m.isRidden='1' where m.id=?";
-	private static final String SQL_FIND_MESSAGE_TEXT = "SELECT m.id, u.id AS userId, username, firstName, lastName, email, m.text, m.isRidden FROM user u INNER JOIN message m ON u.id = m.user_id WHERE m.text like CONCAT( '%',?,'%')";
+	private static final String SQL_SELECT_ALL_MESSAGES = "SELECT m.id, u.id AS user_id, username, first_name, last_name, email, m.text, m.is_read FROM user u INNER JOIN message m ON u.id = m.sender_user_id";
+	private static final String SQL_SELECT_MESSAGE_WITH_ID = "SELECT m.id, u.id AS user_id, username, first_name, last_name, email, m.text, m.is_read FROM user u INNER JOIN message m ON u.id = m.sender_user_id WHERE m.sender_user_id=?";
+	private static final String SQL_UPDATE_MESSAGE_AS_READ = "UPDATE message m SET m.is_read='1' where m.id=?";
+	private static final String SQL_FIND_MESSAGE_TEXT = "SELECT m.id, u.id AS user_id, username, first_name, last_name, email, m.text, m.is_read FROM user u INNER JOIN message m ON u.id = m.user_id WHERE m.text like CONCAT( '%',?,'%')";
 	
 	public MessageDAO() {
 		// TODO Auto-generated constructor stub
@@ -33,8 +33,8 @@ public class MessageDAO implements Serializable {
 			PreparedStatement pstmt = DAOUtil.prepareStatement(connection, SQL_SELECT_ALL_MESSAGES, false, values);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				messages.add(new Message(rs.getInt("id"), rs.getInt("userId"), rs.getString("username"), rs.getString("firstName"),
-						rs.getString("lastName"), rs.getString("email"), rs.getString("text"), rs.getInt("isRidden")));
+				messages.add(new Message(rs.getInt("id"), rs.getInt("user_id"), rs.getString("username"), rs.getString("first_name"),
+						rs.getString("last_name"), rs.getString("email"), rs.getString("text"), rs.getInt("is_read")));
 			}
 			pstmt.close();
 		} catch (SQLException exp) {
@@ -55,8 +55,8 @@ public class MessageDAO implements Serializable {
 			PreparedStatement pstmt = DAOUtil.prepareStatement(connection, SQL_FIND_MESSAGE_TEXT, false, values);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				messages.add(new Message(rs.getInt("id"), rs.getInt("userId"), rs.getString("username"), rs.getString("firstName"),
-						rs.getString("lastName"), rs.getString("email"), rs.getString("text"), rs.getInt("isRidden")));
+				messages.add(new Message(rs.getInt("id"), rs.getInt("user_id"), rs.getString("username"), rs.getString("first_name"),
+						rs.getString("last_name"), rs.getString("email"), rs.getString("text"), rs.getInt("is_read")));
 			}
 			pstmt.close();
 		} catch (SQLException exp) {
@@ -77,8 +77,8 @@ public class MessageDAO implements Serializable {
 			PreparedStatement pstmt = DAOUtil.prepareStatement(connection, SQL_SELECT_MESSAGE_WITH_ID, false, values);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				message = new Message(rs.getInt("id"), rs.getInt("userId"), rs.getString("username"), rs.getString("firstName"),
-						rs.getString("lastName"), rs.getString("email"), rs.getString("text"), rs.getInt("isRidden"));
+				message = new Message(rs.getInt("id"), rs.getInt("user_id"), rs.getString("username"), rs.getString("first_name"),
+						rs.getString("last_name"), rs.getString("email"), rs.getString("text"), rs.getInt("is_read"));
 			System.out.println(message);
 				}
 			pstmt.close();

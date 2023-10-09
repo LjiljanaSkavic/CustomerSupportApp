@@ -12,19 +12,19 @@ public class Message implements Serializable {
 	private String lastName;
 	private String email;
 	private String text;
-	private int isRidden;
+	private int isRead;
 
 	public Message() {}
 	
-	public Message(int id, int userId, String username, String firstName, String lastName, String email, String text, int isRidden) {
+	public Message(int id, int senderUserId, String username, String firstName, String lastName, String email, String text, int isRead) {
 		this.id = id;
-		this.userId = userId;
+		this.userId = senderUserId;
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.text = text;
-		this.isRidden = isRidden;
+		this.isRead = isRead;
 	}
 
 	public int getId() {
@@ -35,12 +35,12 @@ public class Message implements Serializable {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public int getSenderUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setSenderUserId(int senderUserId) {
+		this.userId = senderUserId;
 	}
 
 	public String getUsername() {
@@ -83,21 +83,23 @@ public class Message implements Serializable {
 		this.text = text;
 	}
 
-	public int getIsRidden() {
-		return isRidden;
+	public int getIsRead() {
+		return isRead;
 	}
 
-	public void setIsRidden(int isRidden) {
-		this.isRidden = isRidden;
+	public void setIsRidden(int isRead) {
+		this.isRead = isRead;
 	}
 	
-	public String getIsRiddenString() {
-		return isRidden == 1 ? "Read" : "Unread";
+	public String getIsReadString() {
+		return isRead == 1 ? "Read" : "Unread";
 	}
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", userId=" + userId + ", username=" + username + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", text=" + text + ", isRidden=" + isRidden + "]";
+		return "Message [id=" + id + ", senderUserId=" + userId + ", username=" + username + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", text=" + text + ", isRead=" + isRead
+				+ "]";
 	}
+
 }
