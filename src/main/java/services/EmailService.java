@@ -13,14 +13,11 @@ import beans.EmailBean;
 
 public class EmailService implements Serializable {
 
-	private static final long serialVersionUID = 4952863914488455345L;
+	private static final long serialVersionUID = -2721286242909250128L;
 	
 	public String replayEmail(EmailBean emailBean) {
 		Client client = ClientBuilder.newClient();
-		System.out.println(client);
-		WebTarget target = client.target("http://localhost:8080/email");
-		System.out.println(target);
-		System.out.println(Entity.json(emailBean));
+		WebTarget target = client.target("http://localhost:8090/email/sendMail");
 		Response response = target.request("application/json").post(Entity.json(emailBean));
 		System.out.println(response);
 		if (response.getStatus() == Status.OK.getStatusCode()) {
@@ -28,5 +25,5 @@ public class EmailService implements Serializable {
 		}
 		return "";
 	}
-
+	
 }
